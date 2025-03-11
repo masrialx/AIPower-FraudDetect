@@ -1,138 +1,221 @@
-# **Fraud Detection and Insights Dashboard**
+Certainly! Below is a **clear and structured `README.md`** for your **AI-powered fraud detection project** using Google Gemini API.
+# **AI-Powered Fraud Detection System using Google Gemini API**
+
 ## **Overview**
-This project is aimed at improving fraud detection for both e-commerce transactions and bank credit transactions. The system leverages advanced machine learning models, geolocation analysis, and transaction pattern recognition to detect fraudulent activities. The project includes various tasks such as data analysis, model building, model explainability, and deployment.
 
-An interactive **dashboard** is developed using **Flask** and **Dash** to visualize fraud insights, making it easy to track fraud trends, analyze transaction patterns, and visualize fraud across devices, browsers, and geographical locations.
+This project implements an **AI-powered fraud detection system** using the **Google Gemini API**. The system detects and prevents fraudulent transactions in real-time by analyzing multimodal data such as transaction details, user behavior, and images attached to the transaction. It aims to provide scalable and adaptive fraud detection, offering an enhanced level of security for financial institutions and e-commerce platforms.
 
-## **Business Need**
-Fraud detection plays a crucial role in securing transactions in the financial sector. By improving the accuracy of fraud detection, Adey Innovations Inc. can prevent financial losses, build trust with customers, and enhance the real-time monitoring of financial activities.
+---
 
-## **Tech Stack**
-- **Backend:** Flask (for API development)
-- **Frontend:** Dash (for interactive visualizations)
-- **Machine Learning Libraries:** Scikit-learn, TensorFlow, Keras
-- **Data Processing:** Pandas, Numpy
-- **Data Visualization:** Plotly (for Dash)
-- **Geolocation Analysis:** IP address to country mapping
-- **Containerization:** Docker
+## **Table of Contents**
 
-## **Learning Outcomes**
-- Building and deploying machine learning models using Flask.
-- Containerizing applications using Docker.
-- Creating REST APIs for machine learning models.
-- Real-time prediction serving and model monitoring.
-- Feature engineering and data preprocessing for fraud detection.
-- Understanding and applying model explainability techniques like SHAP and LIME.
-- Developing interactive dashboards for business insights.
+1. [Installation](#installation)
+2. [Prerequisites](#prerequisites)
+3. [Setup](#setup)
+4. [Usage](#usage)
+5. [API Integration](#api-integration)
+6. [Model Evaluation](#model-evaluation)
+7. [Security and Compliance](#security-and-compliance)
+8. [Contributing](#contributing)
+9. [License](#license)
 
-## **Datasets**
-- **Fraud_Data.csv:** E-commerce transaction data with fraud labels.
-  - `user_id`, `signup_time`, `purchase_time`, `purchase_value`, `device_id`, `browser`, `sex`, `age`, `ip_address`, `class`
-- **IpAddress_to_Country.csv:** Maps IP addresses to countries.
-  - `lower_bound_ip_address`, `upper_bound_ip_address`, `country`
-- **creditcard.csv:** Bank transaction data, anonymized for fraud detection.
-  - `Time`, `V1 - V28`, `Amount`, `Class`
-
-## **Features**
-### **Task 1: Data Analysis and Preprocessing**
-- Handle missing values and clean the data.
-- Exploratory Data Analysis (EDA) for univariate and bivariate analysis.
-- Merge datasets for geolocation analysis.
-- Feature engineering for time-based and transaction velocity features.
-- Normalize and scale data, and encode categorical features.
-
-### **Task 2: Model Building and Training**
-- Prepare data and separate features and targets.
-- Split data into training and testing sets.
-- Train various models like Logistic Regression, Random Forest, Gradient Boosting, MLP, CNN, RNN, and LSTM.
-- Use **MLflow** for versioning and experiment tracking.
-
-### **Task 3: Model Explainability**
-- Use **SHAP** and **LIME** for model interpretability.
-- SHAP and LIME plots to visualize feature importance and explain individual predictions.
-
-### **Task 4: Model Deployment and API Development**
-- Set up Flask API to serve trained models.
-- Dockerize the Flask application for portability.
-- Expose endpoints for fraud prediction and monitoring.
-- Integrate Flask-Logging for real-time logging and monitoring.
-
-### **Task 5: Build a Dashboard with Flask and Dash**
-- Develop an interactive **Dash** dashboard to visualize fraud insights.
-- Flask backend serves data from **Fraud_Data.csv** for the frontend visualization.
-- Insights include:
-  - Total transactions, fraud cases, and fraud percentages in summary boxes.
-  - Line chart showing fraud cases over time.
-  - Geographical fraud analysis with bar charts.
-  - Fraud cases comparison across devices and browsers.
+---
 
 ## **Installation**
 
-### **1. Clone the Repository**
+Follow the steps below to set up the fraud detection system on your local machine or server.
+
+### 1. Clone the repository:
+
 ```bash
-git clone https://github.com/your-username/fraud-detection-dashboard.git
-cd fraud-detection-dashboard
+git clone https://github.com/masrialx/AIPower-FraudDetect.git
+cd AIPower-FraudDetect
 ```
 
-### **2. Create Virtual Environment and Install Dependencies**
-```bash
-python3 -m venv venv
-source venv/bin/activate  # On macOS/Linux
-venv\Scripts\activate     # On Windows
-```
+### 2. Install required dependencies:
 
-Install required packages:
 ```bash
 pip install -r requirements.txt
 ```
 
-### **3. Running the Flask API**
-Run the Flask API to serve the fraud detection models:
+This will install all necessary libraries for the project, including Google Gemini API SDK, machine learning libraries (such as TensorFlow, scikit-learn), and other dependencies.
+
+---
+
+## **Prerequisites**
+
+Before you begin, ensure the following requirements are met:
+
+1. **Google Gemini API Key**: You need a valid **API key** for accessing Google Gemini services. If you do not have one, you can obtain it from the [Google Cloud Console](https://console.cloud.google.com/).
+   
+2. **Python 3.x**: This project uses Python 3.8 or higher.
+   
+3. **Google Cloud SDK** (Optional for deployment): If you're deploying the system to Google Cloud, ensure that you have the Google Cloud SDK installed.
+
+4. **Jupyter Notebook** (Optional for model training & evaluation): Install Jupyter to run the notebooks for training and evaluation.
+
+---
+
+## **Setup**
+
+### 1. **Set Up Google Gemini API**
+
+- Visit [Google Cloud Console](https://console.cloud.google.com/).
+- Create a new project or use an existing one.
+- Enable the **Google Gemini API**.
+- Obtain your **API key** and save it for later use.
+
+### 2. **Set Up Environment Variables**
+
+You will need to configure your environment to securely store your **Google API Key**:
+
 ```bash
-python app.py
+export GEMINI_API_KEY="your-api-key"
 ```
-The Flask server will be available at `http://127.0.0.1:5000/`.
 
-### **4. Running the Dash Dashboard**
-In another terminal, run the Dash app:
+Alternatively, create a `.env` file in the project root with the following content:
+
+```env
+GEMINI_API_KEY=your-api-key
+```
+
+---
+
+## **Usage**
+
+### 1. **Run the Fraud Detection System**
+
+The core of the fraud detection system is encapsulated in a Python script that integrates with the Google Gemini API. You can run the detection system with the following command:
+
 ```bash
-python dashboard.py
-```
-The Dash dashboard will be available at `http://127.0.0.1:8050/`.
-
-## **API Endpoints**
-- `/api/summary`: Get total transactions, fraud cases, and fraud percentages.
-- `/api/fraud_trends`: Get fraud cases over time.
-- `/api/fraud_geography`: Get fraud distribution by geography.
-- `/api/fraud_device_browser`: Get fraud cases across devices and browsers.
-
-## **Project Structure**
-```
-fraud-detection-dashboard/
-├── app.py               # Flask backend
-├── dashboard.py         # Dash frontend
-├── fraud_data.csv       # E-commerce transaction data
-├── ipaddress_to_country.csv  # IP address to country mapping
-├── creditcard.csv       # Bank transaction data
-├── requirements.txt     # List of dependencies
-├── mlflow_tracking/     # Folder for MLflow experiment tracking
-└── README.md            # Project documentation
+python detect_fraud.py
 ```
 
-## **Docker Setup**
+This script will process a sample transaction and flag it as either **fraudulent** or **legitimate** based on the AI-powered analysis provided by Gemini.
 
-### **1. Build Docker Image**
+### 2. **API Call Example**
+
+To run the fraud detection for a single transaction, use the `detect_transaction` function:
+
+```python
+from fraud_detection import detect_transaction
+
+transaction_data = {
+    "user_id": "12345",
+    "amount": 500,
+    "location": "New York",
+    "ip_address": "192.168.1.1",
+    "transaction_notes": "Purchase of electronics"
+}
+
+result = detect_transaction(transaction_data)
+print(result)
+```
+
+### 3. **Running the Fraud Detection System in Real-Time**
+
+For real-time fraud detection, set up the system to monitor ongoing transactions via the API. You can integrate it with e-commerce platforms or banking systems. 
+
+### 4. **Evaluate the Model**
+
+To evaluate the performance of the fraud detection model, use the following Jupyter notebook:
+
 ```bash
-docker build -t fraud-detection-model .
+jupyter notebook evaluate_model.ipynb
 ```
 
-### **2. Run Docker Container**
+This notebook runs through the metrics like **accuracy**, **precision**, **recall**, and **F1-score** to assess the model's performance.
+
+---
+
+## **API Integration**
+
+### 1. **Setting Up the Fraud Detection API**
+
+The fraud detection system exposes an API endpoint that can be integrated into external platforms:
+
+#### **Endpoint: `/api/v1/detect_fraud`**
+
+- **Method**: POST
+- **Request Body**: JSON object containing transaction details:
+  
+```json
+{
+  "user_id": "12345",
+  "amount": 500,
+  "location": "New York",
+  "ip_address": "192.168.1.1",
+  "transaction_notes": "Purchase of electronics"
+}
+```
+
+- **Response**: JSON object with the fraud score and flag.
+
+```json
+{
+  "fraud_score": 0.85,
+  "status": "fraudulent",
+  "message": "Transaction flagged as fraudulent due to unusual location and IP address"
+}
+```
+
+### 2. **API Authentication**
+
+To ensure secure API access, authenticate each request using **API tokens** or **OAuth 2.0**. The authentication procedure is defined in the API docs.
+
+---
+
+## **Model Evaluation**
+
+Evaluate the fraud detection model using various **performance metrics**:
+
+- **Accuracy**: Percentage of correctly predicted transactions (both legitimate and fraudulent).
+- **Precision**: The ratio of true positive fraud cases detected to all instances flagged as fraud.
+- **Recall**: The ratio of true positive fraud cases detected to all actual fraud cases.
+- **F1-score**: The harmonic mean of precision and recall.
+
+Run the evaluation with:
+
 ```bash
-docker run -p 5000:5000 fraud-detection-model
+python evaluate_model.py
 ```
 
-## **Future Work**
-- Real-time fraud detection and monitoring system.
-- Model retraining and performance monitoring.
-- Integration with larger e-commerce and banking platforms for production deployment.
+---
+
+## **Security and Compliance**
+
+### 1. **Data Encryption**
+All sensitive data (e.g., transaction data) is encrypted using **AES-256** encryption to ensure security.
+
+### 2. **Regulatory Compliance**
+Ensure compliance with data protection laws like **GDPR** and **PCI-DSS** for handling user data and transactions.
+
+---
+
+## **Contributing**
+
+We welcome contributions to the **AI-Powered Fraud Detection System**!
+
+### **How to Contribute:**
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature-name`).
+5. Open a pull request.
+
+For large changes or feature suggestions, please open an issue first to discuss what you would like to change.
+
+---
+
+## **License**
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+### **Additional Information**
+
+- **Google Gemini Documentation**: [Google Gemini API Docs](https://cloud.google.com/gemini)
+- **Machine Learning Libraries**: TensorFlow, scikit-learn
 
