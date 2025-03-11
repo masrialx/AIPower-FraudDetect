@@ -1,4 +1,3 @@
-Certainly! Below is a **clear and structured `README.md`** for your **AI-powered fraud detection project** using Google Gemini API.
 # **AI-Powered Fraud Detection System using Google Gemini API**
 
 ## **Overview**
